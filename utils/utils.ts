@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
 import axios, { AxiosResponse } from 'axios';
-import { logger } from '../buy';
 import { res } from 'pino-std-serializers';
-import { Logger } from 'pino';
+import pino, { Logger } from 'pino';
 
 import { Keypair, Connection, SlotInfo, clusterApiUrl, SystemProgram, PublicKey, Transaction } from '@solana/web3.js';
 import fs from 'fs/promises'; 
@@ -12,6 +11,36 @@ import bs58 from 'bs58';
 
 
 dotenv.config();
+
+const transport = pino.transport({
+  targets: [
+    // {
+    //   level: 'trace',
+    //   target: 'pino/file',
+    //   options: {
+    //     destination: 'buy.log',
+    //   },
+    // },
+
+    {
+      level: 'trace',
+      target: 'pino-pretty',
+      options: {},
+    },
+  ],
+});
+
+export const logger = pino(
+    {
+      level: 'trace',
+      redact: ['poolKeys'],
+      serializers: {
+        error: pino.stdSerializers.err,
+      },
+      base: undefined,
+    },
+    transport,
+);
 
 export const retrieveEnvVariable = (variableName: string, logger: Logger) => {
   const variable = process.env[variableName] || '';
