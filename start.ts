@@ -464,7 +464,7 @@ const runListener = async () => {
       const key = updatedAccountInfo.accountId.toString();
       const poolState = LIQUIDITY_STATE_LAYOUT_V4.decode(updatedAccountInfo.accountInfo.data);
       logger.info('LIQUIDITY KEY: '+key);
-      logger.info('LIQUIDITY POOL: '+poolState);
+      logger.info('LIQUIDITY POOL: '+JSON.stringify(poolState));
     },
     commitment,
     [
@@ -496,7 +496,7 @@ const runListener = async () => {
       const key = updatedAccountInfo.accountId.toString();
       const accountData = MARKET_STATE_LAYOUT_V3.decode(updatedAccountInfo.accountInfo.data);
       logger.info('OPENBOOK KEY: '+key);
-      logger.info('OPENBOOK POOL: '+accountData);
+      logger.info('OPENBOOK POOL: '+JSON.stringify(accountData));
     },
     commitment,
     [
