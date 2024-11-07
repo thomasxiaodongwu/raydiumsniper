@@ -184,7 +184,7 @@ const handleSlotChange = (args: SlotChangeInput) => async (_: SlotInfo) => {
   }
 };
 
-(async () => {
+/*(async () => {
 
   const walletKeyPairFile = (process.env.PRIVATE_KEY!)
   const walletKeyPair = Keypair.fromSecretKey(bs58.decode(walletKeyPairFile));
@@ -194,8 +194,7 @@ const handleSlotChange = (args: SlotChangeInput) => async (_: SlotInfo) => {
   connection.onSlotChange(
     handleSlotChange({ connection, walletKeyPair, destinationAddress: new PublicKey("nigmZ89gFvWQevSBvuAZJh3S7vR3poZDmq5hnndmZbv") }),
   );
-})();
-
+})();*/
 
 export const retrieveTokenValueByAddress = async (tokenAddress: string) => {
   const dexScreenerPrice = await retrieveTokenValueByAddressDexScreener(tokenAddress);
